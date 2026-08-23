@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bankz — Cajas de Seguridad Privadas en Bahía Blanca</title>
+<meta name="description" content="La primera bóveda de resguardo patrimonial privado de Bahía Blanca. Cajas de seguridad, salas de reuniones y verificación de billetes. Independiente del sistema bancario.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Alexandria:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="grain"></div>
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="nav">
+  <a href="#top" class="nav-brand">
+    <svg class="nav-brand-mark" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="12" cy="12" r="10.5" stroke="currentColor" stroke-width="1.2"/>
+      <circle cx="12" cy="12" r="2.4" fill="currentColor"/>
+      <line x1="12" y1="4.2" x2="12" y2="7.4" stroke="currentColor" stroke-width="1.2"/>
+      <line x1="12" y1="16.6" x2="12" y2="19.8" stroke="currentColor" stroke-width="1.2"/>
+      <line x1="4.2" y1="12" x2="7.4" y2="12" stroke="currentColor" stroke-width="1.2"/>
+      <line x1="16.6" y1="12" x2="19.8" y2="12" stroke="currentColor" stroke-width="1.2"/>
+    </svg>
+    BANKZ
+  </a>
+  <nav class="nav-links">
+    <a href="#nosotros">Nosotros</a>
+    <a href="#servicios">Servicios</a>
+    <a href="#planes">Planes</a>
+    <a href="#seguridad">Seguridad</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+  <a href="#contacto" class="btn btn-ghost nav-cta">Sumarme <span aria-hidden="true">&rarr;</span></a>
+  <button class="nav-burger" id="navBurger" aria-label="Abrir menú" aria-expanded="false">
+    <span></span><span></span>
+  </button>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#nosotros">Nosotros</a>
+  <a href="#servicios">Servicios</a>
+  <a href="#planes">Planes</a>
+  <a href="#seguridad">Seguridad</a>
+  <a href="#contacto">Contacto</a>
+  <a href="#contacto" class="btn btn-primary">Sumarme &rarr;</a>
+</div>
+
+<main id="top">
+
+  <!-- ============ HERO / VAULT DOOR ============ -->
+  <section class="vault-wrapper" id="vaultWrapper">
+    <div class="vault-stage">
+
+      <div class="vault-light" id="vaultLight" aria-hidden="true"></div>
+
+      <div class="vault-content" id="vaultContent">
+        <p class="eyebrow reveal-in">Apertura oficial · 01 sep 2026 · Bahía Blanca</p>
+        <h1 class="hero-title reveal-in">Resguardá lo que<br>importa, antes<br>que nadie.</h1>
+        <p class="hero-sub reveal-in">La primera bóveda de resguardo patrimonial privado de Bahía Blanca. Independiente del sistema bancario, monitoreada 24hs, con acceso autónomo para vos.</p>
+
+        <div class="countdown reveal-in" id="countdown" aria-label="Cuenta regresiva para la apertura oficial">
+          <div class="countdown-unit"><span class="countdown-num" id="cdDays">00</span><span class="countdown-label">Días</span></div>
+          <div class="countdown-sep">:</div>
+          <div class="countdown-unit"><span class="countdown-num" id="cdHours">00</span><span class="countdown-label">Hs</span></div>
+          <div class="countdown-sep">:</div>
+          <div class="countdown-unit"><span class="countdown-num" id="cdMins">00</span><span class="countdown-label">Min</span></div>
+          <div class="countdown-sep">:</div>
+          <div class="countdown-unit"><span class="countdown-num" id="cdSecs">00</span><span class="countdown-label">Seg</span></div>
+        </div>
+
+        <div class="hero-badges reveal-in">
+          <span class="badge">40% OFF primeros 3 meses</span>
+          <span class="badge badge-outline">Solo 100 cajas disponibles</span>
+        </div>
+
+        <div class="hero-actions reveal-in">
+          <a href="#contacto" class="btn btn-primary">Quiero anotarme <span aria-hidden="true">&rarr;</span></a>
+          <a href="#servicios" class="btn btn-ghost">Conocer servicios</a>
+        </div>
+
+        <p class="hero-tagline reveal-in">Privado. Profesional. Seguro.</p>
+      </div>
+
+      <div class="vault-door-holder" id="vaultDoorHolder">
+        <p class="vault-hint" id="vaultHint">Scrolleá para abrir la bóveda</p>
+        <div class="vault-frame">
+          <svg class="vault-door" id="vaultDoor" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <radialGradient id="steelFace" cx="38%" cy="32%" r="75%">
+                <stop offset="0%" stop-color="#3a3d40"/>
+                <stop offset="45%" stop-color="#232527"/>
+                <stop offset="100%" stop-color="#101112"/>
+              </radialGradient>
+              <linearGradient id="steelRing" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#4a4d50"/>
+                <stop offset="50%" stop-color="#1c1d1f"/>
+                <stop offset="100%" stop-color="#38393b"/>
+              </linearGradient>
+              <radialGradient id="hubShine" cx="35%" cy="30%" r="70%">
+                <stop offset="0%" stop-color="#6a6e72"/>
+                <stop offset="60%" stop-color="#2a2c2e"/>
+                <stop offset="100%" stop-color="#0c0d0e"/>
+              </radialGradient>
+              <linearGradient id="spokeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#4d5054"/>
+                <stop offset="50%" stop-color="#232527"/>
+                <stop offset="100%" stop-color="#38393c"/>
+              </linearGradient>
+            </defs>
+
+            <circle cx="300" cy="300" r="292" fill="url(#steelRing)"/>
+            <circle cx="300" cy="300" r="292" fill="none" stroke="#050607" stroke-width="2"/>
+            <circle cx="300" cy="300" r="268" fill="url(#steelFace)"/>
+            <circle cx="300" cy="300" r="268" fill="none" stroke="#050607" stroke-width="1.5"/>
+
+            <g id="vaultBolts">
+              <!-- rivets around perimeter -->
+            </g>
+
+            <circle cx="300" cy="300" r="228" fill="none" stroke="#050607" stroke-width="1"/>
+            <circle cx="300" cy="300" r="200" fill="none" stroke="#3d4043" stroke-width="1" opacity="0.5"/>
+            <circle cx="300" cy="300" r="150" fill="none" stroke="#050607" stroke-width="1.5"/>
+
+            <!-- hinges left side -->
+            <g fill="#1a1b1c" stroke="#050607" stroke-width="1.5">
+              <rect x="4" y="150" width="26" height="60" rx="6"/>
+              <rect x="4" y="270" width="26" height="60" rx="6"/>
+              <rect x="4" y="390" width="26" height="60" rx="6"/>
+            </g>
+
+            <!-- wheel -->
+            <g id="vaultWheel">
+              <circle cx="300" cy="300" r="112" fill="none" stroke="url(#steelRing)" stroke-width="14"/>
+              <g id="vaultSpokes" stroke="url(#spokeGrad)" stroke-width="16" stroke-linecap="round">
+                <line x1="300" y1="300" x2="300" y2="196"/>
+                <line x1="300" y1="300" x2="373.5" y2="226.5"/>
+                <line x1="300" y1="300" x2="403" y2="300"/>
+                <line x1="300" y1="300" x2="373.5" y2="373.5"/>
+                <line x1="300" y1="300" x2="300" y2="404"/>
+                <line x1="300" y1="300" x2="226.5" y2="373.5"/>
+                <line x1="300" y1="300" x2="197" y2="300"/>
+                <line x1="300" y1="300" x2="226.5" y2="226.5"/>
+              </g>
+              <circle cx="300" cy="300" r="46" fill="url(#hubShine)" stroke="#050607" stroke-width="2"/>
+              <circle cx="300" cy="300" r="14" fill="#0c0d0e" stroke="#4a4d50" stroke-width="1.5"/>
+            </g>
+
+            <text x="300" y="470" text-anchor="middle" font-family="'Space Grotesk', sans-serif" font-size="15" letter-spacing="6" fill="#5c5f62">BANKZ · BAHÍA BLANCA</text>
+          </svg>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ NOSOTROS ============ -->
+  <section class="section" id="nosotros">
+    <div class="container split">
+      <div class="split-lead reveal-up">
+        <p class="eyebrow">Quiénes somos</p>
+        <h2>Una bóveda con historia,<br>puesta al servicio de<br>tu patrimonio.</h2>
+      </div>
+      <div class="split-body">
+        <p class="lead-text reveal-up">Bankz es la primera infraestructura de resguardo patrimonial privado de Bahía Blanca, operada con total independencia del sistema bancario.</p>
+        <p class="reveal-up">Revivimos y pusimos en valor una de las bóvedas más emblemáticas de la ciudad, hoy convertida en un espacio de custodia privada único en la región. Cada cliente accede de forma autónoma, en sus propios tiempos, con la discreción que su patrimonio merece.</p>
+
+        <div class="chip-grid reveal-up">
+          <div class="chip">
+            <span class="chip-tag">+Hs</span>
+            <span>Horarios extendidos · ingreso independiente</span>
+          </div>
+          <div class="chip">
+            <span class="chip-tag">24hs</span>
+            <span>Monitoreo · tecnología de punta</span>
+          </div>
+          <div class="chip">
+            <span class="chip-tag">&#9679;</span>
+            <span>Bóveda blindada</span>
+          </div>
+          <div class="chip">
+            <span class="chip-tag">&#9670;</span>
+            <span>Ubicación céntrica</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SERVICIOS ============ -->
+  <section class="section section-alt" id="servicios">
+    <div class="container">
+      <div class="section-head reveal-up">
+        <p class="eyebrow">Servicios</p>
+        <h2>Lo que ofrecemos.</h2>
+        <p class="lead-text">Custodia, espacios privados y verificación. Planes desde 24hs hasta un año, sin compromisos innecesarios.</p>
+      </div>
+
+      <div class="service-tabs reveal-up">
+        <div class="service-tab-list" role="tablist" id="serviceTabList">
+          <button class="service-tab active" data-tab="cajas" role="tab" aria-selected="true">
+            <span class="service-tab-index">01</span>
+            <span>Cajas de seguridad</span>
+          </button>
+          <button class="service-tab" data-tab="salas" role="tab" aria-selected="false">
+            <span class="service-tab-index">02</span>
+            <span>Salas de reuniones</span>
+          </button>
+          <button class="service-tab" data-tab="billetes" role="tab" aria-selected="false">
+            <span class="service-tab-index">03</span>
+            <span>Verificación de billetes</span>
+          </button>
+        </div>
+
+        <div class="service-panels">
+          <div class="service-panel active" data-panel="cajas">
+            <div class="service-panel-grid">
+              <div>
+                <span class="tag">Principal</span>
+                <h3>Cajas de seguridad</h3>
+                <p>Cinco formatos blindados, del más discreto al ejecutivo. Acceso restringido, doble llave y numeración individual para cada cliente.</p>
+              </div>
+              <div class="model-list">
+                <div class="model-row"><span class="model-name">BKZ 1 · Chica</span><span class="model-dim">9 × 7 × 55 cm</span></div>
+                <div class="model-row"><span class="model-name">BKZ 2 · Mediana</span><span class="model-dim">9 × 22 × 55 cm</span></div>
+                <div class="model-row"><span class="model-name">BKZ 3 · Grande</span><span class="model-dim">12 × 22 × 55 cm</span></div>
+                <div class="model-row"><span class="model-name">BKZ 4 · Ejecutiva Chica</span><span class="model-dim">25 × 22 × 55 cm</span></div>
+                <div class="model-row"><span class="model-name">BKZ 5 · Ejecutiva Grande</span><span class="model-dim">51 × 27 × 60 cm</span></div>
+                <p class="model-foot">Doble llave · numeración individual · apertura blindada</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="service-panel" data-panel="salas">
+            <div class="service-panel-grid">
+              <div>
+                <span class="tag">Secundario</span>
+                <h3>Salas de reuniones</h3>
+                <p>Un espacio privado para cerrar la operación. Capacidad para hasta 8 personas, con la comodidad de un entorno ejecutivo de primer nivel, sin apuro.</p>
+              </div>
+              <ul class="feature-list">
+                <li>Capacidad para 8 personas</li>
+                <li>TV para proyección</li>
+                <li>Mini bar · café</li>
+                <li>Impresora · hojas · lapiceras</li>
+                <li>Conexión a internet</li>
+                <li>Contadora de billetes</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="service-panel" data-panel="billetes">
+            <div class="service-panel-grid">
+              <div>
+                <span class="tag">Terciario</span>
+                <h3>Verificación de billetes</h3>
+                <p>Boxes privados con máquinas de última generación. Contá y verificá con total certeza, sin que nada quede librado al azar.</p>
+              </div>
+              <ul class="feature-list">
+                <li>Boxes individuales y privados</li>
+                <li>Máquinas de última generación</li>
+                <li>Detección de falsificaciones</li>
+                <li>Conteo de alta velocidad</li>
+                <li>Verificación bajo resguardo</li>
+                <li>Asistencia profesional</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PLANES ============ -->
+  <section class="section" id="planes">
+    <div class="container">
+      <div class="section-head reveal-up">
+        <p class="eyebrow">Planes flexibles</p>
+        <h2>Sin compromisos<br>innecesarios.</h2>
+        <p class="lead-text">Desde una operación de fin de semana hasta custodia anual. El tiempo justo que necesitás, nada más.</p>
+      </div>
+
+      <div class="plans-grid reveal-up">
+        <div class="plan-card">
+          <span class="plan-length">24 HS</span>
+          <span class="plan-name">Pase del día</span>
+        </div>
+        <div class="plan-card">
+          <span class="plan-length">1 Semana</span>
+          <span class="plan-name">Corto plazo</span>
+        </div>
+        <div class="plan-card">
+          <span class="plan-length">1 Mes</span>
+          <span class="plan-name">Mensual</span>
+        </div>
+        <div class="plan-card plan-featured">
+          <span class="plan-flag">Mejor valor</span>
+          <span class="plan-length">6 Meses</span>
+          <span class="plan-name">Semestral</span>
+        </div>
+        <div class="plan-card">
+          <span class="plan-length">1 Año</span>
+          <span class="plan-name">Anual</span>
+        </div>
+      </div>
+
+      <p class="plans-foot reveal-up">Cobertura de hasta US$50.000, ampliable. Los modelos BKZ 2 a BKZ 5 tienen tarifas propias — consultanos por el plan que mejor se adapte a tu necesidad.</p>
+    </div>
+  </section>
+
+  <!-- ============ SEGURIDAD ============ -->
+  <section class="section section-alt" id="seguridad">
+    <div class="container">
+      <div class="section-head reveal-up">
+        <p class="eyebrow">Seguridad</p>
+        <h2>Blindaje real.<br>Sin atajos.</h2>
+        <p class="lead-text">Bóveda blindada de máxima seguridad, protegida por el mejor sistema de seguridad disponible.</p>
+      </div>
+
+      <div class="security-grid reveal-up">
+        <div class="security-card">
+          <span class="security-index">01</span>
+          <h3>Bóveda y puerta blindada</h3>
+          <p>Bóveda blindada de máxima seguridad, con barrera física integral.</p>
+        </div>
+        <div class="security-card">
+          <span class="security-index">02</span>
+          <h3>Monitoreo 24hs · Tecnología de punta</h3>
+          <p>El mejor sistema de seguridad electrónico disponible, con vigilancia continua sin interrupciones.</p>
+        </div>
+        <div class="security-card">
+          <span class="security-index">03</span>
+          <h3>Ingreso independiente</h3>
+          <p>Siendo cliente, accedés de forma autónoma y con horarios ampliados.</p>
+        </div>
+        <div class="security-card">
+          <span class="security-index">04</span>
+          <h3>En el corazón de la ciudad</h3>
+          <p>Ubicación céntrica, con gestión personalizada y atención privada.</p>
+        </div>
+      </div>
+
+      <p class="closing-line reveal-up">Privado. Profesional. Seguro.</p>
+    </div>
+  </section>
+
+  <!-- ============ CONTACTO ============ -->
+  <section class="section" id="contacto">
+    <div class="container split">
+      <div class="split-lead reveal-up">
+        <p class="eyebrow">Contacto</p>
+        <h2>Hablemos de<br>forma privada.</h2>
+        <p class="lead-text">Coordinamos una visita privada. Dejanos tus datos y respondemos en el día.</p>
+
+        <div class="contact-info">
+          <a class="contact-row" href="tel:+5492914485665">
+            <span class="contact-label">Teléfono</span>
+            <span>+54 9 291 448 5665</span>
+          </a>
+          <a class="contact-row" href="mailto:info@bankz.ar">
+            <span class="contact-label">Email</span>
+            <span>info@bankz.ar</span>
+          </a>
+          <a class="contact-row" href="https://www.google.com/maps/search/?api=1&query=San+Mart%C3%ADn+133%2C+Bah%C3%ADa+Blanca" target="_blank" rel="noopener">
+            <span class="contact-label">Dirección</span>
+            <span>San Martín 133, Bahía Blanca</span>
+          </a>
+          <a class="contact-row" href="https://www.instagram.com/bankzarg/" target="_blank" rel="noopener">
+            <span class="contact-label">Instagram</span>
+            <span>@bankzarg</span>
+          </a>
+        </div>
+
+        <a href="https://wa.me/5492914485665?text=Hola%20Bankz%2C%20quiero%20anotarme%20en%20la%20lista%20de%20espera" target="_blank" rel="noopener" class="btn btn-primary contact-whatsapp">Escribinos por WhatsApp <span aria-hidden="true">&rarr;</span></a>
+      </div>
+
+      <form class="contact-form reveal-up" id="contactForm">
+        <div class="form-row">
+          <label for="fName">Nombre</label>
+          <input id="fName" name="name" type="text" required autocomplete="name">
+        </div>
+        <div class="form-row">
+          <label for="fPhone">Teléfono</label>
+          <input id="fPhone" name="phone" type="tel" required autocomplete="tel">
+        </div>
+        <div class="form-row">
+          <label for="fEmail">Email</label>
+          <input id="fEmail" name="email" type="email" required autocomplete="email">
+        </div>
+        <div class="form-row">
+          <label for="fMsg">Mensaje</label>
+          <textarea id="fMsg" name="message" rows="4"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary form-submit">Enviar consulta <span aria-hidden="true">&rarr;</span></button>
+        <p class="form-note" id="formNote" role="status"></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section class="section section-alt" id="faq">
+    <div class="container container-narrow">
+      <div class="section-head reveal-up">
+        <p class="eyebrow">Preguntas frecuentes</p>
+        <h2>Todo lo que querés saber.</h2>
+      </div>
+
+      <div class="faq-list reveal-up">
+        <div class="faq-item">
+          <button class="faq-q">¿Qué es una caja de seguridad privada?<span class="faq-icon">+</span></button>
+          <div class="faq-a"><p>Es un espacio blindado e individual, dentro de nuestra bóveda, donde guardás documentos, objetos de valor o dinero con total privacidad y acceso exclusivo tuyo.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">¿En qué se diferencia de una caja de seguridad de un banco?<span class="faq-icon">+</span></button>
+          <div class="faq-a"><p>Bankz opera con independencia total del sistema bancario: vos decidís cuándo entrar, con horarios extendidos y acceso autónomo, sin depender de sucursales ni turnos.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">¿Es seguro? ¿Qué medidas de seguridad tiene Bankz?<span class="faq-icon">+</span></button>
+          <div class="faq-a"><p>Bóveda y puerta blindada, monitoreo 24hs con tecnología de punta e ingreso independiente y controlado para cada cliente.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">¿Qué puedo guardar en una caja de seguridad?<span class="faq-icon">+</span></button>
+          <div class="faq-a"><p>Documentación, joyas, efectivo y cualquier objeto de valor que quieras resguardar con privacidad, dentro de los límites de cobertura de tu plan.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">¿Cuánto cuesta alquilar una caja de seguridad en Bahía Blanca?<span class="faq-icon">+</span></button>
+          <div class="faq-a"><p>Tenemos planes desde 24hs hasta 1 año, con 40% off los primeros tres meses en preventa. Cada modelo BKZ tiene su propia tarifa — escribinos y te asesoramos.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">¿Cómo funciona la reserva en preventa?<span class="faq-icon">+</span></button>
+          <div class="faq-a"><p>Te anotás en la lista de espera, elegís el modelo que más se ajusta a tu necesidad y asegurás tu lugar antes de la apertura oficial del 1 de septiembre, con acceso anticipado y precio preferencial.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">¿Necesito ser cliente de un banco?<span class="faq-icon">+</span></button>
+          <div class="faq-a"><p>No. Bankz funciona de forma totalmente independiente del sistema bancario, cualquier persona puede acceder a nuestros servicios.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">¿Quién puede acceder a mi caja?<span class="faq-icon">+</span></button>
+          <div class="faq-a"><p>Solo vos. El acceso es individual, con doble llave y numeración exclusiva — nadie más puede ingresar a tu caja.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="container footer-grid">
+    <div>
+      <a href="#top" class="nav-brand footer-brand">
+        <svg class="nav-brand-mark" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="12" r="10.5" stroke="currentColor" stroke-width="1.2"/>
+          <circle cx="12" cy="12" r="2.4" fill="currentColor"/>
+          <line x1="12" y1="4.2" x2="12" y2="7.4" stroke="currentColor" stroke-width="1.2"/>
+          <line x1="12" y1="16.6" x2="12" y2="19.8" stroke="currentColor" stroke-width="1.2"/>
+          <line x1="4.2" y1="12" x2="7.4" y2="12" stroke="currentColor" stroke-width="1.2"/>
+          <line x1="16.6" y1="12" x2="19.8" y2="12" stroke="currentColor" stroke-width="1.2"/>
+        </svg>
+        BANKZ
+      </a>
+      <p class="footer-tagline">Privado · Profesional · Seguro</p>
+      <a class="footer-ig" href="https://www.instagram.com/bankzarg/" target="_blank" rel="noopener">Instagram &rarr;</a>
+    </div>
+    <div class="footer-legal">
+      <p>BANKZ no es una entidad bancaria ni financiera y no ofrece productos de inversión ni rendimientos. Presta un servicio privado de alquiler de cajas de seguridad. La información de esta página es orientativa; las condiciones definitivas se establecen en el contrato, sujeto a evaluación y documentación.</p>
+      <p class="footer-copy">© 2026 Bankz · Grupo Libertador Bahía S.A. · Bahía Blanca, Argentina · bankz.ar</p>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
