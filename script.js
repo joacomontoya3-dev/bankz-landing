@@ -25,9 +25,10 @@
     });
   });
 
-  /* ===================== VAULT DOOR SCROLL MECHANIC (video scrub) ===================== */
+  /* ===================== VAULT DOOR SCROLL MECHANIC (frame-sequence scrub) ===================== */
   const vaultWrapper = document.getElementById('vaultWrapper');
-  const vaultVideo = document.getElementById('vaultVideo');
+  const vaultCanvas = document.getElementById('vaultCanvas');
+  const vaultCtx = vaultCanvas.getContext('2d');
   const vaultLight = document.getElementById('vaultLight');
   const vaultContent = document.getElementById('vaultContent');
   const vaultHint = document.getElementById('vaultHint');
@@ -35,21 +36,85 @@
   const clamp01 = v => Math.min(1, Math.max(0, v));
   const easeOut = t => 1 - Math.pow(1 - t, 3);
 
-  let videoDuration = 0;
-  let videoReady = false;
-  vaultVideo.addEventListener('loadedmetadata', () => {
-    videoDuration = vaultVideo.duration || 0;
-    videoReady = true;
-    // prime playback so iOS Safari allows programmatic seeking afterwards
-    const primePlay = vaultVideo.play();
-    if (primePlay && primePlay.then) {
-      primePlay.then(() => vaultVideo.pause()).catch(() => {});
+  const FRAME_COUNT = 240;
+  const FRAME_BASE = 'public/frames/frame_';
+  const frames = new Array(FRAME_COUNT);
+  const loaded = new Array(FRAME_COUNT).fill(false);
+  let loadedCount = 0;
+  let currentFrameIndex = 0;
+
+  function nearestLoadedIndex(target) {
+    if (loaded[target]) return target;
+    for (let d = 1; d < FRAME_COUNT; d++) {
+      if (target - d >= 0 && loaded[target - d]) return target - d;
+      if (target + d < FRAME_COUNT && loaded[target + d]) return target + d;
     }
-    updateVault();
-  });
+    return -1;
+  }
+
+  function drawFrame(img) {
+    const cw = vaultCanvas.width, ch = vaultCanvas.height;
+    const iw = img.naturalWidth, ih = img.naturalHeight;
+    if (!cw || !ch || !iw || !ih) return;
+    const scale = Math.max(cw / iw, ch / ih);
+    const dw = iw * scale, dh = ih * scale;
+    const dx = (cw - dw) / 2;
+    const dy = 0.55 * (ch - dh); // mirrors object-position: center 55%
+    vaultCtx.clearRect(0, 0, cw, ch);
+    vaultCtx.drawImage(img, dx, dy, dw, dh);
+  }
+
+  function drawCurrentFrame(idx) {
+    if (idx == null) idx = currentFrameIndex;
+    currentFrameIndex = idx;
+    const useIdx = loaded[idx] ? idx : nearestLoadedIndex(idx);
+    if (useIdx === -1) return;
+    drawFrame(frames[useIdx]);
+  }
+
+  function resizeCanvas() {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const rect = vaultCanvas.getBoundingClientRect();
+    vaultCanvas.width = Math.round(rect.width * dpr);
+    vaultCanvas.height = Math.round(rect.height * dpr);
+    drawCurrentFrame(currentFrameIndex);
+  }
+
+  function updateLoadingHint() {
+    if (loadedCount < FRAME_COUNT) {
+      vaultHint.textContent = `Cargando bóveda... ${Math.round((loadedCount / FRAME_COUNT) * 100)}%`;
+    } else {
+      vaultHint.textContent = 'Scrolleá para abrir la bóveda';
+    }
+  }
+
+  function preloadFrames() {
+    let nextIndex = 0;
+    const concurrency = 8;
+    function loadNext() {
+      if (nextIndex >= FRAME_COUNT) return;
+      const i = nextIndex++;
+      const img = new Image();
+      img.decoding = 'async';
+      img.onload = () => {
+        frames[i] = img;
+        loaded[i] = true;
+        loadedCount++;
+        if (i === 0 || reducedMotion) drawCurrentFrame(reducedMotion ? FRAME_COUNT - 1 : currentFrameIndex);
+        updateLoadingHint();
+        loadNext();
+      };
+      img.onerror = () => { loadedCount++; updateLoadingHint(); loadNext(); };
+      img.src = `${FRAME_BASE}${String(i + 1).padStart(4, '0')}.jpg`;
+    }
+    for (let c = 0; c < concurrency; c++) loadNext();
+  }
+
+  updateLoadingHint();
+  resizeCanvas();
+  preloadFrames();
 
   let ticking = false;
-  let lastVideoTime = -1;
 
   function updateVault() {
     ticking = false;
@@ -57,20 +122,14 @@
     const total = rect.height - window.innerHeight;
     const progress = clamp01(-rect.top / total);
 
-    // scrub the video frame-by-frame with scroll position
-    if (videoReady && videoDuration > 0) {
-      const t = progress * videoDuration;
-      if (Math.abs(t - lastVideoTime) > 0.01) {
-        vaultVideo.currentTime = t;
-        lastVideoTime = t;
-      }
-    }
-
     if (reducedMotion) {
       vaultContent.style.opacity = String(progress > 0.3 ? 1 : progress / 0.3);
       vaultHint.style.opacity = progress > 0.02 ? '0' : '1';
       return;
     }
+
+    // scrub the frame sequence with scroll position
+    drawCurrentFrame(Math.round(progress * (FRAME_COUNT - 1)));
 
     // light burst as the door swings open (matches the clip's opening beat)
     const lightP = Math.sin(clamp01((progress - 0.55) / 0.4) * Math.PI);
@@ -96,7 +155,7 @@
       requestAnimationFrame(updateVault);
     }
   }, { passive: true });
-  window.addEventListener('resize', updateVault);
+  window.addEventListener('resize', () => { resizeCanvas(); updateVault(); });
   updateVault();
 
   /* ===================== COUNTDOWN ===================== */
