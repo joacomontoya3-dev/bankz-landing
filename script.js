@@ -114,21 +114,30 @@
   resizeCanvas();
   preloadFrames();
 
-  let ticking = false;
+  // smooth the raw scroll position toward a lagging "display" value each
+  // frame, instead of snapping straight to it — this is what keeps the
+  // door/light/text feeling like they're gliding rather than jumping
+  // whenever the mouse wheel or trackpad fires a chunky scroll delta.
+  const SMOOTHING = 0.11;
+  const SNAP_EPSILON = 0.0004;
+  let targetProgress = 0;
+  let displayProgress = 0;
+  let rafId = null;
 
-  function updateVault() {
-    ticking = false;
+  function computeTargetProgress() {
     const rect = vaultWrapper.getBoundingClientRect();
     const total = rect.height - window.innerHeight;
-    const progress = clamp01(-rect.top / total);
+    targetProgress = clamp01(-rect.top / total);
+  }
 
+  function renderVault(progress) {
     if (reducedMotion) {
       vaultContent.style.opacity = String(progress > 0.3 ? 1 : progress / 0.3);
       vaultHint.style.opacity = progress > 0.02 ? '0' : '1';
       return;
     }
 
-    // scrub the frame sequence with scroll position
+    // scrub the frame sequence with (smoothed) scroll position
     drawCurrentFrame(Math.round(progress * (FRAME_COUNT - 1)));
 
     // light burst as the door swings open (matches the clip's opening beat)
@@ -149,14 +158,29 @@
     }
   }
 
-  window.addEventListener('scroll', () => {
-    if (!ticking) {
-      ticking = true;
-      requestAnimationFrame(updateVault);
+  function loop() {
+    computeTargetProgress();
+    const diff = targetProgress - displayProgress;
+
+    if (Math.abs(diff) < SNAP_EPSILON) {
+      displayProgress = targetProgress;
+      renderVault(displayProgress);
+      rafId = null; // settled — stop looping until the next scroll
+      return;
     }
-  }, { passive: true });
-  window.addEventListener('resize', () => { resizeCanvas(); updateVault(); });
-  updateVault();
+
+    displayProgress += diff * SMOOTHING;
+    renderVault(displayProgress);
+    rafId = requestAnimationFrame(loop);
+  }
+
+  function requestRender() {
+    if (rafId == null) rafId = requestAnimationFrame(loop);
+  }
+
+  window.addEventListener('scroll', requestRender, { passive: true });
+  window.addEventListener('resize', () => { resizeCanvas(); requestRender(); });
+  requestRender();
 
   /* ===================== COUNTDOWN ===================== */
   const target = new Date('2026-09-01T00:00:00-03:00').getTime();
