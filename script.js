@@ -25,10 +25,9 @@
     });
   });
 
-  /* ===================== VAULT DOOR SCROLL MECHANIC ===================== */
+  /* ===================== VAULT DOOR SCROLL MECHANIC (video scrub) ===================== */
   const vaultWrapper = document.getElementById('vaultWrapper');
-  const vaultDoor = document.getElementById('vaultDoor');
-  const vaultWheel = document.getElementById('vaultWheel');
+  const vaultVideo = document.getElementById('vaultVideo');
   const vaultLight = document.getElementById('vaultLight');
   const vaultContent = document.getElementById('vaultContent');
   const vaultHint = document.getElementById('vaultHint');
@@ -36,7 +35,21 @@
   const clamp01 = v => Math.min(1, Math.max(0, v));
   const easeOut = t => 1 - Math.pow(1 - t, 3);
 
+  let videoDuration = 0;
+  let videoReady = false;
+  vaultVideo.addEventListener('loadedmetadata', () => {
+    videoDuration = vaultVideo.duration || 0;
+    videoReady = true;
+    // prime playback so iOS Safari allows programmatic seeking afterwards
+    const primePlay = vaultVideo.play();
+    if (primePlay && primePlay.then) {
+      primePlay.then(() => vaultVideo.pause()).catch(() => {});
+    }
+    updateVault();
+  });
+
   let ticking = false;
+  let lastVideoTime = -1;
 
   function updateVault() {
     ticking = false;
@@ -44,28 +57,27 @@
     const total = rect.height - window.innerHeight;
     const progress = clamp01(-rect.top / total);
 
+    // scrub the video frame-by-frame with scroll position
+    if (videoReady && videoDuration > 0) {
+      const t = progress * videoDuration;
+      if (Math.abs(t - lastVideoTime) > 0.01) {
+        vaultVideo.currentTime = t;
+        lastVideoTime = t;
+      }
+    }
+
     if (reducedMotion) {
-      vaultDoor.style.opacity = String(1 - progress);
       vaultContent.style.opacity = String(progress > 0.3 ? 1 : progress / 0.3);
       vaultHint.style.opacity = progress > 0.02 ? '0' : '1';
       return;
     }
 
-    // phase 1: wheel spin + bolt retraction (0 -> 0.32)
-    const spinP = easeOut(clamp01(progress / 0.32));
-    vaultWheel.style.transform = `rotate(${spinP * 640}deg)`;
+    // light burst as the door swings open (matches the clip's opening beat)
+    const lightP = Math.sin(clamp01((progress - 0.55) / 0.4) * Math.PI);
+    vaultLight.style.opacity = String(lightP * 0.7);
 
-    // phase 2: door swings open on left hinge (0.18 -> 0.78)
-    const openP = easeOut(clamp01((progress - 0.18) / 0.6));
-    const angle = openP * -108;
-    vaultDoor.style.transform = `rotateY(${angle}deg) translateZ(0)`;
-
-    // light burst peaks mid-open
-    const lightP = Math.sin(clamp01((progress - 0.15) / 0.7) * Math.PI);
-    vaultLight.style.opacity = String(lightP * 0.9);
-
-    // content reveal (0.32 -> 0.85)
-    const contentP = easeOut(clamp01((progress - 0.32) / 0.5));
+    // content reveal once the door has visibly started opening
+    const contentP = easeOut(clamp01((progress - 0.6) / 0.35));
     vaultContent.style.opacity = String(contentP);
     vaultContent.style.transform = `translateY(${(1 - contentP) * 26}px) scale(${0.97 + contentP * 0.03})`;
 

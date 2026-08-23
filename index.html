@@ -55,7 +55,11 @@
   <section class="vault-wrapper" id="vaultWrapper">
     <div class="vault-stage">
 
+      <video class="vault-video" id="vaultVideo" src="assets/vault-hero.mp4" muted playsinline preload="auto"></video>
+      <div class="vault-scrim" aria-hidden="true"></div>
       <div class="vault-light" id="vaultLight" aria-hidden="true"></div>
+
+      <p class="vault-hint" id="vaultHint">Scrolleá para abrir la bóveda</p>
 
       <div class="vault-content" id="vaultContent">
         <p class="eyebrow reveal-in">Apertura oficial · 01 sep 2026 · Bahía Blanca</p>
@@ -83,75 +87,6 @@
         </div>
 
         <p class="hero-tagline reveal-in">Privado. Profesional. Seguro.</p>
-      </div>
-
-      <div class="vault-door-holder" id="vaultDoorHolder">
-        <p class="vault-hint" id="vaultHint">Scrolleá para abrir la bóveda</p>
-        <div class="vault-frame">
-          <svg class="vault-door" id="vaultDoor" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <radialGradient id="steelFace" cx="38%" cy="32%" r="75%">
-                <stop offset="0%" stop-color="#3a3d40"/>
-                <stop offset="45%" stop-color="#232527"/>
-                <stop offset="100%" stop-color="#101112"/>
-              </radialGradient>
-              <linearGradient id="steelRing" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#4a4d50"/>
-                <stop offset="50%" stop-color="#1c1d1f"/>
-                <stop offset="100%" stop-color="#38393b"/>
-              </linearGradient>
-              <radialGradient id="hubShine" cx="35%" cy="30%" r="70%">
-                <stop offset="0%" stop-color="#6a6e72"/>
-                <stop offset="60%" stop-color="#2a2c2e"/>
-                <stop offset="100%" stop-color="#0c0d0e"/>
-              </radialGradient>
-              <linearGradient id="spokeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="#4d5054"/>
-                <stop offset="50%" stop-color="#232527"/>
-                <stop offset="100%" stop-color="#38393c"/>
-              </linearGradient>
-            </defs>
-
-            <circle cx="300" cy="300" r="292" fill="url(#steelRing)"/>
-            <circle cx="300" cy="300" r="292" fill="none" stroke="#050607" stroke-width="2"/>
-            <circle cx="300" cy="300" r="268" fill="url(#steelFace)"/>
-            <circle cx="300" cy="300" r="268" fill="none" stroke="#050607" stroke-width="1.5"/>
-
-            <g id="vaultBolts">
-              <!-- rivets around perimeter -->
-            </g>
-
-            <circle cx="300" cy="300" r="228" fill="none" stroke="#050607" stroke-width="1"/>
-            <circle cx="300" cy="300" r="200" fill="none" stroke="#3d4043" stroke-width="1" opacity="0.5"/>
-            <circle cx="300" cy="300" r="150" fill="none" stroke="#050607" stroke-width="1.5"/>
-
-            <!-- hinges left side -->
-            <g fill="#1a1b1c" stroke="#050607" stroke-width="1.5">
-              <rect x="4" y="150" width="26" height="60" rx="6"/>
-              <rect x="4" y="270" width="26" height="60" rx="6"/>
-              <rect x="4" y="390" width="26" height="60" rx="6"/>
-            </g>
-
-            <!-- wheel -->
-            <g id="vaultWheel">
-              <circle cx="300" cy="300" r="112" fill="none" stroke="url(#steelRing)" stroke-width="14"/>
-              <g id="vaultSpokes" stroke="url(#spokeGrad)" stroke-width="16" stroke-linecap="round">
-                <line x1="300" y1="300" x2="300" y2="196"/>
-                <line x1="300" y1="300" x2="373.5" y2="226.5"/>
-                <line x1="300" y1="300" x2="403" y2="300"/>
-                <line x1="300" y1="300" x2="373.5" y2="373.5"/>
-                <line x1="300" y1="300" x2="300" y2="404"/>
-                <line x1="300" y1="300" x2="226.5" y2="373.5"/>
-                <line x1="300" y1="300" x2="197" y2="300"/>
-                <line x1="300" y1="300" x2="226.5" y2="226.5"/>
-              </g>
-              <circle cx="300" cy="300" r="46" fill="url(#hubShine)" stroke="#050607" stroke-width="2"/>
-              <circle cx="300" cy="300" r="14" fill="#0c0d0e" stroke="#4a4d50" stroke-width="1.5"/>
-            </g>
-
-            <text x="300" y="470" text-anchor="middle" font-family="'Space Grotesk', sans-serif" font-size="15" letter-spacing="6" fill="#5c5f62">BANKZ · BAHÍA BLANCA</text>
-          </svg>
-        </div>
       </div>
 
     </div>
